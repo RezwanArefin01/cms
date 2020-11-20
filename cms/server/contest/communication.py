@@ -117,7 +117,7 @@ def accept_question(sql_session, participation, timestamp, subject, text):
         raise QuestionsNotAllowed()
 
     subject_length = len(subject)
-    text_length = len(text)
+    text_length = len(text.strip())
     if subject_length > Question.MAX_SUBJECT_LENGTH \
             or text_length > Question.MAX_TEXT_LENGTH:
         logger.warning("Long question (%d, %d) dropped for user %s.",
@@ -129,6 +129,14 @@ def accept_question(sql_session, participation, timestamp, subject, text):
                "content at most %(max_text_length)d."),
             {"max_subject_length": Question.MAX_SUBJECT_LENGTH,
              "max_text_length": Question.MAX_TEXT_LENGTH})
+
+    if text_length == 0: 
+        logger.warning("Empty question (%d, %d) dropped for user %s.",
+                       subject_length, text_length,
+                       participation.user.username)
+        raise UnacceptableQuestion(
+            N_("Empty question!"),
+            N_("Question subject can be empty, but question text cannot be empty."))
 
     question = Question(timestamp, subject, text, participation=participation)
     sql_session.add(question)
