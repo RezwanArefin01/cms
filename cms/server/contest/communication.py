@@ -79,11 +79,13 @@ def send_telegram_question_notification(question):
         return
     escape = lambda t: t.replace("<", "&lt;").replace(">", "&gt;")
     message = """<b>New question</b>
-From: <code>{username}</code>
-Subject: <i>{subject}</i>
+<b>From:</b> {first_name} {last_name} (<code>{username}</code>)
+<b>Subject:</b> {subject}
 
 {text}
 """.format(
+        first_name=escape(question.participation.user.first_name),
+        last_name=escape(question.participation.user.last_name),
         username=escape(question.participation.user.username),
         subject=escape(question.subject),
         text=escape(question.text))
