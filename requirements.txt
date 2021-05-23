@@ -23,5 +23,5 @@ Jinja2>=2.10,<2.11  # http://jinja.pocoo.org/docs/latest/changelog/
 pyyaml>=5.3,<5.4  # http://pyyaml.org/wiki/PyYAML
 
 # Only for printing:
-pycups>=1.9,<1.10  # https://pypi.python.org/pypi/pycups
-PyPDF2>=1.26,<1.27  # https://github.com/mstamy2/PyPDF2/blob/master/CHANGELOG
+#pycups>=1.9,<1.10  # https://pypi.python.org/pypi/pycups
+#PyPDF2>=1.26,<1.27  # https://github.com/mstamy2/PyPDF2/blob/master/CHANGELOG
